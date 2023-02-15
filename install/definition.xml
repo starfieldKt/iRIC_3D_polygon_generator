@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SolverDefinition 
+    xmlns="www.iric.net/SolverDefinition/1.0"
+    name="STL_generator" caption="STL_generator" version="1.0.0" 
+	copyright="Keita Hoshino"
+    release="2023.99.99" 
+    homepage=""
+    executable="STL_generator.py"
+    iterationtype="time"
+    gridtype="structured2d"
+    >
+	<CalculationCondition>
+		<Tab name="basic_setting" caption="Basic Setting">
+			<Item name="inputfile" caption="CGNS File Name">
+				<Definition valueType="cgns_filename" default="Select CGNS file name" />
+			</Item>
+			<Item name="result_depth" caption="Depth">
+				<Definition valueType="result_gridNodeReal" cgnsFile="inputfile"/>
+			</Item>
+		</Tab>
+	</CalculationCondition>
+	<GridRelatedCondition>
+		<Item name="Elevation" caption="Elevation">
+			<Definition position="node" valueType="real" default="max" />
+		</Item>
+	</GridRelatedCondition>
+</SolverDefinition>
