@@ -11,11 +11,17 @@
     >
 	<CalculationCondition>
 		<Tab name="basic_setting" caption="Basic Setting">
-			<Item name="inputfile" caption="CGNS File Name">
+			<Item name="read_cgns_name" caption="CGNS File Name">
 				<Definition valueType="cgns_filename" default="Select CGNS file name" />
 			</Item>
-			<Item name="result_depth" caption="Depth">
-				<Definition valueType="result_gridNodeReal" cgnsFile="inputfile"/>
+			<Item name="elevation_name" caption="Elevation">
+				<Definition valueType="result_gridNodeReal" cgnsFile="read_cgns_name"/>
+			</Item>
+			<Item name="start_time_output" caption="start time">
+				<Definition valueType="real" default="0.0"/>
+			</Item>
+			<Item name="end_time_output" caption="end time">
+				<Definition valueType="real" default="0.0"/>
 			</Item>
 		</Tab>
 	</CalculationCondition>
