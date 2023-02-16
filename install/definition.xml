@@ -14,6 +14,9 @@
 			<Item name="read_cgns_name" caption="CGNS File Name">
 				<Definition valueType="cgns_filename" default="Select CGNS file name" />
 			</Item>
+			<Item name="elevation_scale" caption="elevation scale">
+				<Definition valueType="real" default="1.0"/>
+			</Item>
 			<Item name="elevation_name" caption="Elevation">
 				<Definition valueType="result_gridNodeReal" cgnsFile="read_cgns_name"/>
 			</Item>

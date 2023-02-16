@@ -46,13 +46,15 @@ def cgns_close():
 # --------------------------------------------------
 def read_initial_condition():
 
-    global n_step_read, elevation_name, save_location, n_cell
+    global n_step_read, elevation_scale, elevation_name, save_location, n_cell
     global start_time_output, end_time_output
     global n_node_x, n_node_y, coordinate_x, coordinate_y
     global coordinate_x_1d, coordinate_y_1d, coordinate_x_2d, coordinate_y_2d
 
     # 読み込み用CGNSの計算ステップ数
     n_step_read = iric.cg_iRIC_Read_Sol_Count(read_cgns_id)
+    # 3Dモデルを出力を終了する時間
+    elevation_scale = iric.cg_iRIC_Read_Real(write_cgns_id, "elevation_scale")
     # 読み込み用CGNSの標高のデータ名
     elevation_name = iric.cg_iRIC_Read_String(write_cgns_id, "elevation_name")
     # ファイルの保存場所
@@ -73,8 +75,8 @@ def read_initial_condition():
     coordinate_y_1d = np.array(coordinate_y)
 
     # CGNSから読み込んだcoordinate_x_1dとcoordinate_y_1dは1次元配列なので2次元配列にする
-    coordinate_x_2d = np.array(coordinate_x_1d).reshape(n_node_x, n_node_y)
-    coordinate_y_2d = np.array(coordinate_y_1d).reshape(n_node_x, n_node_y)
+    coordinate_x_2d = np.array(coordinate_x_1d).reshape(n_node_y, n_node_x)
+    coordinate_y_2d = np.array(coordinate_y_1d).reshape(n_node_y, n_node_x)
 
 
 # --------------------------------------------------
@@ -86,9 +88,9 @@ def make_polygon_node_coordinate_list():
 
     elevation_vale = iric.cg_iRIC_Read_Sol_Node_Real(read_cgns_id, step, elevation_name)
     # CGNSから読み込んだelevation_valeをnumpy配列にする。
-    elevation_vale_1d = np.array(elevation_vale)
+    elevation_vale_1d = np.array(elevation_vale) * elevation_scale
     # CGNSから読み込んだelevation_valeは1次元配列なので2次元配列にする
-    elevation_vale_2d = np.array(elevation_vale_1d).reshape(n_node_x, n_node_y)
+    elevation_vale_2d = np.array(elevation_vale_1d).reshape(n_node_y, n_node_x)
 
     polygon_node_list = np.stack(
         [coordinate_x_1d, coordinate_y_1d, elevation_vale_1d], 1
@@ -105,19 +107,19 @@ def make_tryangle():
     for i in range(n_node_x - 1):
         for j in range(n_node_y - 1):
             tryangle_tmp_1 = np.array(
-                [i * n_node_y + j, (i + 1) * n_node_y + j, (i + 1) * n_node_y + j + 1],
+                [i + j * n_node_x, (i + 1) + j * n_node_x, (i + 1) + (j + 1) * n_node_x],
                 dtype=np.int64,
             )
             tryangle_tmp_2 = np.array(
-                [i * n_node_y + j, i * n_node_y + j + 1, (i + 1) * n_node_y + j + 1],
+                [i + j * n_node_x, (i + 1) + (j + 1) * n_node_x , i + (j + 1) * n_node_x],
                 dtype=np.int64,
             )
 
             triangle_configuration_node_list[
-                (i * (n_node_y - 1) + j) * 2
+                (i + j * (n_node_x - 1)) * 2
             ] = tryangle_tmp_1
             triangle_configuration_node_list[
-                (i * (n_node_y - 1) + j) * 2 + 1
+                (i + j * (n_node_x - 1)) * 2 + 1
             ] = tryangle_tmp_2
 
 
@@ -149,7 +151,7 @@ if __name__ == "__main__":
     # write_cgns_name = sys.argv[1]
 
     write_cgns_name = (
-        "C:\WorkSpace\iRIC\iRICver4\project\stl_generator_test\stl_gen\Case1.cgn"
+        "C:\WorkSpace\iRIC\pro\STL_generator\Case1.cgn"
     )
 
     cgns_open()
