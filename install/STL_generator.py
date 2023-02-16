@@ -122,12 +122,15 @@ def make_tryangle():
                 (i + j * (n_node_x - 1)) * 2 + 1
             ] = tryangle_tmp_2
 
-
+# --------------------------------------------------
+# stlファイルの作成
+# --------------------------------------------------
 def make_polygon_obj():
 
     global triangle_configuration_node_list
     global polygon_node_list
 
+    # この辺についてはよくわかっていない
     polygon_obj = mesh.Mesh(
         np.zeros(triangle_configuration_node_list.shape[0], dtype=mesh.Mesh.dtype)
     )
