@@ -17,6 +17,9 @@
 			<Item name="elevation_name" caption="Elevation">
 				<Definition valueType="result_gridNodeReal" cgnsFile="read_cgns_name"/>
 			</Item>
+			<Item name="save_location" caption="save folder">
+                    <Definition valueType="foldername" />
+                </Item>
 			<Item name="start_time_output" caption="start time">
 				<Definition valueType="real" default="0.0"/>
 			</Item>
