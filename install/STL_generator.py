@@ -106,12 +106,21 @@ def make_tryangle():
 
     for i in range(n_node_x - 1):
         for j in range(n_node_y - 1):
+
             tryangle_tmp_1 = np.array(
-                [i + j * n_node_x, (i + 1) + j * n_node_x, (i + 1) + (j + 1) * n_node_x],
+                [
+                    i + j * n_node_x,
+                    (i + 1) + j * n_node_x,
+                    (i + 1) + (j + 1) * n_node_x,
+                ],
                 dtype=np.int64,
             )
             tryangle_tmp_2 = np.array(
-                [i + j * n_node_x, (i + 1) + (j + 1) * n_node_x , i + (j + 1) * n_node_x],
+                [
+                    i + j * n_node_x,
+                    (i + 1) + (j + 1) * n_node_x,
+                    i + (j + 1) * n_node_x,
+                ],
                 dtype=np.int64,
             )
 
@@ -121,6 +130,7 @@ def make_tryangle():
             triangle_configuration_node_list[
                 (i + j * (n_node_x - 1)) * 2 + 1
             ] = tryangle_tmp_2
+
 
 # --------------------------------------------------
 # stlファイルの作成
@@ -147,15 +157,11 @@ if __name__ == "__main__":
 
     ier = 0
 
-    # if len(sys.argv) < 2:
-    #     print("Error: CGNS file name not specified.")
-    #     exit()
+    if len(sys.argv) < 2:
+        print("Error: CGNS file name not specified.")
+        exit()
 
-    # write_cgns_name = sys.argv[1]
-
-    write_cgns_name = (
-        "C:\WorkSpace\iRIC\pro\STL_generator\Case1.cgn"
-    )
+    write_cgns_name = sys.argv[1]
 
     cgns_open()
     read_initial_condition()
