@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <SolverDefinition 
     xmlns="www.iric.net/SolverDefinition/1.0"
-    name="STL_generator" caption="STL_generator" version="1.0.0" 
+    name="3D_polygon_generator" caption="3D_polygon_generator" version="1.0.0" 
 	copyright="Keita Hoshino"
     release="2023.99.99" 
     homepage=""
-    executable="STL_generator.py"
+    executable="3D_polygon_generator.py"
     iterationtype="time"
     gridtype="structured2d"
     >
