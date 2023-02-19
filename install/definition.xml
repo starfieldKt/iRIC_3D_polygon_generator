@@ -14,21 +14,37 @@
 			<Item name="read_cgns_name" caption="CGNS File Name">
 				<Definition valueType="cgns_filename" default="Select CGNS file name" />
 			</Item>
-			<Item name="elevation_scale" caption="elevation scale">
+			<Item name="save_location" caption="Save Folder">
+				<Definition valueType="foldername" />
+			</Item>
+			<Item name="save_file_name" caption="Save File Name">
+				<Definition valueType="string" />
+			</Item>
+			<Item name="output_stl" caption="Out Put Stl">
+				<Definition valueType="integer" default="0" checkBox="true" />
+			</Item>
+			<Item name="output_obj" caption="Output obj">
+				<Definition valueType="integer" default="0" checkBox="true" />
+			</Item>
+			<Item name="elevation_scale" caption="Z Scale">
 				<Definition valueType="real" default="1.0"/>
 			</Item>
-			<Item name="elevation_name" caption="Elevation">
+			<Item name="start_time_output" caption="Output Start Time">
+				<Definition valueType="real" default="0.0"/>
+			</Item>
+			<Item name="end_time_output" caption="Oitput End Time">
+				<Definition valueType="real" default="0.0"/>
+			</Item>
+			<Item name="bottom_elevation_name" caption="Elevation Name">
 				<Definition valueType="result_gridNodeReal" cgnsFile="read_cgns_name"/>
 			</Item>
-			<Item name="save_location" caption="save folder">
-                    <Definition valueType="foldername" />
-                </Item>
-			<Item name="start_time_output" caption="start time">
-				<Definition valueType="real" default="0.0"/>
+			<Item name="add_water_surface" caption="Add Water Surface">
+				<Definition valueType="integer" default="0" checkBox="true" />
 			</Item>
-			<Item name="end_time_output" caption="end time">
-				<Definition valueType="real" default="0.0"/>
+			<Item name="ws_elevation_name" caption="Water surface elevation Name">
+				<Definition valueType="result_gridNodeReal" cgnsFile="read_cgns_name"/>
 			</Item>
+
 		</Tab>
 	</CalculationCondition>
 	<GridRelatedCondition>
