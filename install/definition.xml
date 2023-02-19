@@ -20,7 +20,7 @@
 			<Item name="save_file_name" caption="Save File Name">
 				<Definition valueType="string" />
 			</Item>
-			<Item name="output_stl" caption="Out Put Stl">
+			<Item name="output_stl" caption="Output Stl">
 				<Definition valueType="integer" default="0" checkBox="true" />
 			</Item>
 			<Item name="output_obj" caption="Output obj">
