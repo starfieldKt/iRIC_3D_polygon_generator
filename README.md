@@ -1,1 +1,1 @@
-# iRIC_STL_generator
+# iRIC_3D_polygon_generator
