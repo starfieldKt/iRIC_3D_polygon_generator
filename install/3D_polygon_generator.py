@@ -248,16 +248,16 @@ def make_tryangle(previous_count):
             tryangle_tmp_1 = np.array(
                 [
                     i + j * n_node_x + previous_count,
-                    (i + 1) + (j + 1) * n_node_x + previous_count,
                     (i + 1) + j * n_node_x + previous_count,
+                    (i + 1) + (j + 1) * n_node_x + previous_count,
                 ],
                 dtype=np.int64,
             )
             tryangle_tmp_2 = np.array(
                 [
                     i + j * n_node_x + previous_count,
-                    i + (j + 1) * n_node_x + previous_count,
                     (i + 1) + (j + 1) * n_node_x + previous_count,
+                    i + (j + 1) * n_node_x + previous_count,
                 ],
                 dtype=np.int64,
             )
