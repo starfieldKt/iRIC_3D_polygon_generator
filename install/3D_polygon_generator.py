@@ -53,6 +53,7 @@ def read_initial_condition():
     global add_water_surface, ws_elevation_name
     global n_node_x, n_node_y, coordinate_x, coordinate_y
     global coordinate_x_1d, coordinate_y_1d
+    global inversion_stl, inversion_obj
 
     # 読み込み用CGNSの計算ステップ数
     n_step_read = iric.cg_iRIC_Read_Sol_Count(read_cgns_id)
@@ -71,8 +72,12 @@ def read_initial_condition():
 
     # stlを出力するか
     output_stl = iric.cg_iRIC_Read_Integer(write_cgns_id, "output_stl")
+    # stlの南北を反転させるか
+    inversion_stl = iric.cg_iRIC_Read_Integer(write_cgns_id, "inversion_stl")
     # objを出力するか
     output_obj = iric.cg_iRIC_Read_Integer(write_cgns_id, "output_obj")
+    # objの南北を反転させるか
+    inversion_obj = iric.cg_iRIC_Read_Integer(write_cgns_id, "inversion_obj")
 
     # ファイルの保存場所
     save_location = iric.cg_iRIC_Read_String(write_cgns_id, "save_location")
@@ -160,7 +165,7 @@ def get_v(x_coords, y_coords, z_coords):
             + " "
             + str(z_coords[i])
             + " "
-            + str(y_coords[i])
+            + str(y_coords[i] * (1 - 2 * inversion_obj))
             + "\n"
         )
 
@@ -278,7 +283,12 @@ def make_tryangle(previous_count):
 def make_polygon_stl(elevation_vale_1d, triangle_configuration_node_list, bottom_or_ws):
 
     polygon_node_list = np.stack(
-        [coordinate_x_1d, coordinate_y_1d, elevation_vale_1d], 1
+        [
+            coordinate_x_1d,
+            coordinate_y_1d * (1 - 2 * inversion_stl),
+            elevation_vale_1d,
+        ],
+        1,
     )
 
     # この辺についてはよくわかっていない
@@ -363,15 +373,15 @@ if __name__ == "__main__":
 
     ier = 0
 
-    if len(sys.argv) < 2:
-        print("Error: CGNS file name not specified.")
-        exit()
+    # if len(sys.argv) < 2:
+    #     print("Error: CGNS file name not specified.")
+    #     exit()
 
-    write_cgns_name = sys.argv[1]
+    # write_cgns_name = sys.argv[1]
 
-    # write_cgns_name = (
-    #     "C:\WorkSpace\iRIC\iRICver4\project\stl_generator_test\stl_gen_4\Case1.cgn"
-    # )
+    write_cgns_name = (
+        "C:\WorkSpace\iRIC\iRICver4\project\stl_generator_test\polygon_gen_3\Case1.cgn"
+    )
 
     cgns_open()
     read_initial_condition()

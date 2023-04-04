@@ -23,7 +23,13 @@
 			<Item name="output_stl" caption="Output Stl">
 				<Definition valueType="integer" default="0" checkBox="true" />
 			</Item>
+			<Item name="inversion_stl" caption="inversion Noth and south(stl)">
+				<Definition valueType="integer" default="0" checkBox="true" />
+			</Item>
 			<Item name="output_obj" caption="Output obj">
+				<Definition valueType="integer" default="0" checkBox="true" />
+			</Item>
+			<Item name="inversion_obj" caption="inversion Noth and south(obj)">
 				<Definition valueType="integer" default="0" checkBox="true" />
 			</Item>
 			<Item name="elevation_scale" caption="Z Scale">

@@ -29,8 +29,16 @@
             <translation>stlを出力する</translation>
         </message>
         <message>
+            <source>inversion Noth and south(stl)</source>
+            <translation>南北を反転させる(stl)</translation>
+        </message>
+        <message>
             <source>Output obj</source>
             <translation>objを出力する</translation>
+        </message>
+        <message>
+            <source>inversion Noth and south(obj)</source>
+            <translation>南北を反転させる(obj)</translation>
         </message>
         <message>
             <source>Z Scale</source>
