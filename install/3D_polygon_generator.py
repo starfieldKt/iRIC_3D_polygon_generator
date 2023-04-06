@@ -329,17 +329,7 @@ def make_polygon_obj(v_text, vt_text, f_text, bottom_or_ws):
 
         # マテリアル定義ファイル
         obj_text = "# mtl file" + "\n"
-        obj_text += (
-            "mtllib "
-            + save_file_name
-            + "_time="
-            + str("{:.2f}".format(time))
-            + "_"
-            + bottom_or_ws
-            + ".mtl"
-            + "\n"
-            + "\n"
-        )
+        obj_text += "mtllib " + "texture" + "_" + bottom_or_ws + ".mtl" + "\n" + "\n"
 
         # # グループ名
         # obj_text += "# Group Name" + "\n"
@@ -373,15 +363,15 @@ if __name__ == "__main__":
 
     ier = 0
 
-    # if len(sys.argv) < 2:
-    #     print("Error: CGNS file name not specified.")
-    #     exit()
+    if len(sys.argv) < 2:
+        print("Error: CGNS file name not specified.")
+        exit()
 
-    # write_cgns_name = sys.argv[1]
+    write_cgns_name = sys.argv[1]
 
-    write_cgns_name = (
-        "C:\WorkSpace\iRIC\iRICver4\project\stl_generator_test\polygon_gen_3\Case1.cgn"
-    )
+    # write_cgns_name = (
+    #     "C:\WorkSpace\iRIC\iRICver4\project\stl_generator_test\polygon_gen_3\Case1.cgn"
+    # )
 
     cgns_open()
     read_initial_condition()
